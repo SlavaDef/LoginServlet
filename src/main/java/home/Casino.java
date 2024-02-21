@@ -7,20 +7,26 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/casino")
 public class Casino extends HttpServlet {
 
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        PrintWriter writer = resp.getWriter();
+        String login = req.getParameter("user_login");
+        String play = req.getParameter("play");
+        String play2 = req.getParameter("play2");
 
-        resp.sendRedirect("index2.jsp");
-        //  resp.setContentType("text/html"); // Content-Type: text/html
-            // MIME types
+        try {
+            writer.println(login + "<p> you chose: " + play + "</p>");
+            writer.println(login + "<p>you chose: " + play2 + "</p>");
 
-           // PrintWriter pw = resp.getWriter();
-          //  pw.println("<html><head><title>Servlets_Test</title></head>"); // імя вкладки
-          //  pw.println("<body><h1>The weatrer is fine today?      Red or black?</h1></body></html>");
-
+        } finally {
+            writer.close();
+        }
     }
 }
